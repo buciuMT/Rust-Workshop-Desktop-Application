@@ -1,5 +1,14 @@
 import { Button, TextEdit, GridBox } from "std-widgets.slint";
 
+// enum Pages{
+//     StartPage,
+//     ResultPage,
+// }
+
+// export global Master {
+    
+// }
+
 export component AppWindow inherits Window {
     title: "Calculator";
     in-out property <string> textarea: ""; // Proprietate pentru afișarea textului în zona de text
@@ -13,6 +22,7 @@ export component AppWindow inherits Window {
     VerticalLayout {
         text_box := TextEdit {
             text: root.textarea;
+            width: 600px;
             // wrap: TextWrap.no-wrap;
             height: 100px;
             horizontal-alignment: TextHorizontalAlignment.center;
@@ -84,4 +94,22 @@ export component AppWindow inherits Window {
     }   
         // TASK: Adaugă alte rânduri pentru cifrele și operatorii rămași, similar cu primul rând.
         // HINT: Creează noi `GridLayout` și adaugă butoane pentru cifrele "4" până la "9", operatorii "*", "-", "/", ".", "Clear" și "=".
+}
+
+export component res_window inherits Window {
+    in-out property <string> otext;
+    width: 200px;
+    height: 150px;
+    title: "Result";
+
+    Text {
+        height: 75px;
+        text: root.otext;
+    }
+
+    Rectangle {
+        Button {
+            text: "Ok";
+        }
+    }
 }
