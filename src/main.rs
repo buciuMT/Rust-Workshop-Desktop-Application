@@ -16,12 +16,16 @@ fn main() -> Result<(), slint::PlatformError> {
     // TASK: Adaugă logica pentru `on_add_to_text_area`, pentru a manevra cazurile "C", "=", și alte input-uri
     ui.on_add_to_text_area(move |current_text, new_input| {
         let ui = ui_handle.unwrap();
+        ui.set_tfocus(false);
+        ui.set_textarea(match new_input.as_str() {
+            "C" => {println!("test");"".into()},
+            _=> current_text+new_input.as_str(),
+            _ => todo!()
+        });
 
         // TASK: Adaugă logica pentru cazurile:
         // - "C": Golirea zonei de text
         // - "=": Calcularea rezultatului și afișarea acestuia
-        // - Altele: Adăugarea input-ului curent la zona de text
-        // HINT: Folosește un `match` pentru a verifica valoarea `new_input`.
     });
 
     ui.run()
