@@ -1,13 +1,20 @@
-import { Button, TextEdit, GridBox } from "std-widgets.slint";
+import { Button, TextEdit, GridBox, StandardButton } from "std-widgets.slint";
 
-// enum Pages{
-//     StartPage,
-//     ResultPage,
-// }
+export component res_window inherits Dialog {
+    in-out property <string> otext;
+    width: 200px;
+    height: 150px;
+    title: "Result";
 
-// export global Master {
-    
-// }
+    Text {
+        height: 75px;
+        text: root.otext;
+    }
+
+    StandardButton {
+        kind: ok;
+    }
+}
 
 export component AppWindow inherits Window {
     title: "Calculator";
@@ -94,22 +101,4 @@ export component AppWindow inherits Window {
     }   
         // TASK: Adaugă alte rânduri pentru cifrele și operatorii rămași, similar cu primul rând.
         // HINT: Creează noi `GridLayout` și adaugă butoane pentru cifrele "4" până la "9", operatorii "*", "-", "/", ".", "Clear" și "=".
-}
-
-export component res_window inherits Window {
-    in-out property <string> otext;
-    width: 200px;
-    height: 150px;
-    title: "Result";
-
-    Text {
-        height: 75px;
-        text: root.otext;
-    }
-
-    Rectangle {
-        Button {
-            text: "Ok";
-        }
-    }
 }

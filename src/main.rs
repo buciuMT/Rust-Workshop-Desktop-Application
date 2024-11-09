@@ -1,7 +1,5 @@
-use std::{iter::Peekable, str::Chars};
+use std::{iter::Peekable, str::Chars, thread};
 
-use lazy_static::lazy_static;
-use regex::Regex;
 use slint::include_modules;
 
 include_modules!();
@@ -18,10 +16,18 @@ fn main() -> Result<(), slint::PlatformError> {
         ui.set_textarea(match new_input.as_str() {
             "C" => "".into(),
             "=" => {
-                let res = evaluate(current_text.as_str()).into();
-                let new_windows = res_window::new();
-                
-                res
+                let res: String = evaluate(current_text.as_str()).into();
+                let new_window = res_window::new();
+                if !new_window.is_err() {
+                    let new_window = new_window.unwrap();
+                    new_window.set_otext(res.clone().into());
+                    if new_window.show().is_err() {
+                        eprintln!("Unable to show dialog");
+                    }
+                } else {
+                    eprintln!("Unable to create dialog");
+                }
+                res.into()
             }
             _ => current_text + new_input.as_str(),
         });
